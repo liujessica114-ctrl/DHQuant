@@ -40,7 +40,6 @@ Use a dedicated environment because the project contains its own `basicsr` packa
 - [Training](#training)
 - [Testing](#testing)
 - [Results](#results)
-- [Citation](#citation)
 - [Acknowledgements](#acknowledgements)
 
 ## Datasets
@@ -66,21 +65,21 @@ Braces denote alternatives. At ×3, an HR image `0001.png` pairs with LR image `
 
 ## Models
 
-**DHQuant weights:** nine historical checkpoints have been checked locally. **Public download links are pending.** The release filenames are:
+Download the nine DHQuant checkpoints from [Release v0.1.1](https://github.com/liujessica114-ctrl/DHQuant/releases/tag/v0.1.1) or the links below.
 
 | Scale | Precision | Checkpoint filename |
 | :---: | :---: | --- |
-| ×2 | W2A2 | `DHQuant_SwinIRLight_x2_W2A2.pth` |
-| ×2 | W3A3 | `DHQuant_SwinIRLight_x2_W3A3.pth` |
-| ×2 | W4A4 | `DHQuant_SwinIRLight_x2_W4A4.pth` |
-| ×3 | W2A2 | `DHQuant_SwinIRLight_x3_W2A2.pth` |
-| ×3 | W3A3 | `DHQuant_SwinIRLight_x3_W3A3.pth` |
-| ×3 | W4A4 | `DHQuant_SwinIRLight_x3_W4A4.pth` |
-| ×4 | W2A2 | `DHQuant_SwinIRLight_x4_W2A2.pth` |
-| ×4 | W3A3 | `DHQuant_SwinIRLight_x4_W3A3.pth` |
-| ×4 | W4A4 | `DHQuant_SwinIRLight_x4_W4A4.pth` |
+| ×2 | W2A2 | [DHQuant_SwinIRLight_x2_W2A2.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x2_W2A2.pth) |
+| ×2 | W3A3 | [DHQuant_SwinIRLight_x2_W3A3.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x2_W3A3.pth) |
+| ×2 | W4A4 | [DHQuant_SwinIRLight_x2_W4A4.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x2_W4A4.pth) |
+| ×3 | W2A2 | [DHQuant_SwinIRLight_x3_W2A2.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x3_W2A2.pth) |
+| ×3 | W3A3 | [DHQuant_SwinIRLight_x3_W3A3.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x3_W3A3.pth) |
+| ×3 | W4A4 | [DHQuant_SwinIRLight_x3_W4A4.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x3_W4A4.pth) |
+| ×4 | W2A2 | [DHQuant_SwinIRLight_x4_W2A2.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x4_W2A2.pth) |
+| ×4 | W3A3 | [DHQuant_SwinIRLight_x4_W3A3.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x4_W3A3.pth) |
+| ×4 | W4A4 | [DHQuant_SwinIRLight_x4_W4A4.pth](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/DHQuant_SwinIRLight_x4_W4A4.pth) |
 
-The examples place these files in `release_assets/checkpoints/`, which is excluded from the source package. See the [model zoo](docs/MODEL_ZOO.md) for selected iterations and historical results, and the [checkpoint manifest](docs/checkpoints.json) for SHA-256 checksums.
+Place downloaded weights in `release_assets/checkpoints/` to use the testing example below. Weights are downloaded separately from the source code; [SHA256SUMS](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/SHA256SUMS) provides checksums. See the [model zoo](docs/MODEL_ZOO.md) for historical results.
 
 **FP initialization:** for new quantization runs, obtain the DIV2K-trained SwinIR-light models from the [official SwinIR releases](https://github.com/JingyunLiang/SwinIR/releases):
 
@@ -138,14 +137,7 @@ Values are from historical evaluation logs; full benchmark verification with the
 
 Values retain the historical log precision. Full ×2 / ×3 / ×4 results and known manuscript/log differences are in the [model zoo](docs/MODEL_ZOO.md).
 
-## Citation
-
-The DHQuant paper metadata and BibTeX entry will be added when confirmed.
 
 ## Acknowledgements
 
-This project builds on [2DQuant](https://github.com/Kai-Liu001/2DQuant), [BasicSR](https://github.com/XPixelGroup/BasicSR), and [SwinIR](https://github.com/JingyunLiang/SwinIR). DAS uses the equivalent rescaling rule of SmoothQuant; the manuscript acknowledges RPTQ for prior range-based channel grouping. The inherited uniform quantizer, DOBI initialization, and distillation machinery retain their upstream attribution.
-
-The code retains the **Apache License 2.0**; see [LICENSE](LICENSE) and [NOTICE](NOTICE).
-
-Additional documentation: [command reference](docs/COMMANDS.md) · [code map](docs/CODE_MAP.md) · [release and reproduction guide](docs/RELEASE_GUIDE.md) · [paper alignment](docs/PAPER_ALIGNMENT.md).
+This project builds on [2DQuant](https://github.com/Kai-Liu001/2DQuant), [BasicSR](https://github.com/XPixelGroup/BasicSR), and [SwinIR](https://github.com/JingyunLiang/SwinIR).

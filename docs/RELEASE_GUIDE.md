@@ -34,7 +34,8 @@ Use the matching scale/bit asset and configuration; add `num_gpu=0` for CPU.
 These commands require neither FP initialization weights nor calibration files.
 `release_assets/` is the local staging location used by the maintainer and is
 excluded from source control. Users may supply a different checkpoint path.
-Public download URLs are still pending in `checkpoints.json`.
+Public download URLs are available in [checkpoints.json](checkpoints.json) and
+[Release v0.1.1](https://github.com/liujessica114-ctrl/DHQuant/releases/tag/v0.1.1).
 
 ## Historical training settings
 
@@ -97,10 +98,14 @@ benchmark evaluation. Before describing a final paper reproduction release:
    environment, recording versions and comparing the resulting metrics.
 2. Resolve the remaining manuscript/loss-definition and metric discrepancies
    documented in `PAPER_ALIGNMENT.md`; preserve an explicit version for changes.
-3. Upload the unchanged weight assets, publish SHA-256 checksums, and populate
-   `download_url` entries. Do not claim local staging is a public download.
-4. Complete paper citation and ablation correspondence. Keep local calibration
+3. Complete paper citation and ablation correspondence. Keep local calibration
    assets separate from the source distribution.
+
+Weight publication is complete: all nine assets and `SHA256SUMS` are available
+in [Release v0.1.1](https://github.com/liujessica114-ctrl/DHQuant/releases/tag/v0.1.1),
+with direct links in `checkpoints.json`. On 2026-11-18, GitHub asset sizes and
+SHA-256 digests matched the local manifest, and the downloaded checksum file
+matched all nine entries. This verifies upload integrity, not benchmark results.
 
 Build source distributions with `python setup.py sdist`. The manifest includes
 code, configurations, scripts, tests and documentation, and excludes `.review`.

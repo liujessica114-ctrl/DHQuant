@@ -1,8 +1,8 @@
 # Model zoo and historical evaluation records
 
-Nine main-table checkpoints have been identified in the development checkout. Their scale and bit-width match the saved tensors, and each has an explicit loading record in a historical evaluation log. Public downloads and benchmark verification using the release code are pending.
+Nine main-table checkpoints are available in [Release v0.1.1](https://github.com/liujessica114-ctrl/DHQuant/releases/tag/v0.1.1). Their scale and bit-width match the saved tensors, and each has an explicit loading record in a historical evaluation log. Full benchmark verification using the release code remains pending.
 
-The machine-readable [checkpoint manifest](checkpoints.json) records current SHA-256 hashes, original experiment paths, release filenames, logged settings, and historical results. Unchanged copies have been staged locally under the release filenames; original files remain untouched. All nine files total 161,924,214 bytes (154.42 MiB). Local staging does not provide a public download.
+The machine-readable [checkpoint manifest](checkpoints.json) records direct download links, SHA-256 hashes, original experiment paths, release filenames, logged settings, and historical results. All nine files total 161,924,214 bytes (154.42 MiB). On 2026-11-18, their GitHub asset sizes and SHA-256 digests were verified against the local manifest; the downloaded [SHA256SUMS](https://github.com/liujessica114-ctrl/DHQuant/releases/download/v0.1.1/SHA256SUMS) also matched all nine entries. Original files remain unchanged.
 
 ## Checkpoint inventory
 
@@ -44,7 +44,7 @@ Some repeated evaluations of the same recorded checkpoint path differ slightly. 
 
 ## Original checkpoint identities
 
-Paths below are relative to the original development checkout. Locally staged release assets use `DHQuant_SwinIRLight_x{scale}_W{bit}A{bit}.pth`; public download links will be added when available.
+Paths below are relative to the original development checkout. Published release assets use `DHQuant_SwinIRLight_x{scale}_W{bit}A{bit}.pth`; direct download links are in [checkpoints.json](checkpoints.json) and the [README](../README.md#models).
 
 | Scale | W/A bits | Historical checkpoint |
 | --- | --- | --- |
