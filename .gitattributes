@@ -1,0 +1,2 @@
+# Keep shell entry points usable after Windows/Linux migrations.
+*.sh text eol=lf

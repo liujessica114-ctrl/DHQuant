@@ -1,0 +1,104 @@
+# DHQuant on SwinIR-light. Paths are relative to the repository root.
+name: test_DHQuant_x4_bit4
+model_type: DHQuantModel
+scale: 4
+num_gpu: 1
+manual_seed: 2026
+cali_data: keydata/cali_data_x4.pth
+bit: 4
+quant:
+  bound_policy: ordered  # Use legacy explicitly for historical inverted HCG intervals.
+  hook_per_layer: true
+  hook_per_block: false
+  qkv_separation: true
+  das: true
+  das_alpha: 0.5
+  weight_per_channel: true
+  hcg: true
+  n_groups: 32
+  export_init_stats: false
+datasets:
+  test_1:
+    task: SR
+    name: Set5
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/Set5/HR
+    dataroot_lq: datasets/benchmark/Set5/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+  test_2:
+    task: SR
+    name: Set14
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/Set14/HR
+    dataroot_lq: datasets/benchmark/Set14/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+  test_3:
+    task: SR
+    name: B100
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/B100/HR
+    dataroot_lq: datasets/benchmark/B100/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+  test_4:
+    task: SR
+    name: Urban100
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/Urban100/HR
+    dataroot_lq: datasets/benchmark/Urban100/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+  test_5:
+    task: SR
+    name: Manga109
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/Manga109/HR
+    dataroot_lq: datasets/benchmark/Manga109/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+network_Q:
+  type: SwinIR
+  upscale: 4
+  img_size: 64
+  window_size: 8
+  img_range: 1.0
+  depths:
+  - 6
+  - 6
+  - 6
+  - 6
+  embed_dim: 60
+  num_heads:
+  - 6
+  - 6
+  - 6
+  - 6
+  mlp_ratio: 2
+  upsampler: pixelshuffledirect
+path:
+  pretrain_network_Q: experiments/train_DHQuant_x4_bit4/models/net_Q_4000.pth
+  strict_load_Q: true
+  resume_state: null
+pathFP:
+  pretrain_network_FP: experiments/pretrained_models/SwinIR/002_lightweightSR_DIV2K_s64w8_SwinIR-S_x4.pth
+  strict_load_FP: true
+val:
+  save_img: true
+  suffix: null
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: true
+quant_conv: false

@@ -1,0 +1,61 @@
+# Datasets and generated training/evaluation artifacts
+datasets/
+experiments/
+results/
+tb_logger/
+wandb/
+tmp/
+visual/
+stat_figs/
+stat_codes/
+history/
+keydata/
+experiments copy/
+
+# Model weights and checkpoints
+*.pth
+*.pth.tar
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+
+# Logs and generated Python/build artifacts
+*.log
+*.out
+.eggs/
+*.egg-info/
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.whl
+
+# Local Python environments
+.venv/
+.venv-fig1/
+venv/
+env/
+ENV/
+
+# Local research references and writing materials
+introduction/
+xiezuo/
+*.pdf
+*.docx
+~$*
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Local preparation records and document extraction tools
+.review/
+*.tar.gz
+.pytest_cache/
+
+# Migrated development archive and locally staged release assets
+/2D_smooth_AHCPTQ/
+/release_assets/

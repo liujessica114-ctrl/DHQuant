@@ -1,0 +1,23 @@
+DHQuant builds on 2DQuant, BasicSR, and SwinIR.
+
+2DQuant: Low-bit Post-Training Quantization for Image Super-Resolution
+Kai Liu, Haotong Qin, Yong Guo, Xin Yuan, Linghe Kong, Guihai Chen, Yulun Zhang.
+NeurIPS 2024. https://github.com/Kai-Liu001/2DQuant
+The PTQ framework, uniform fake quantization, DOBI search, and distillation
+calibration are derived from this implementation.
+
+BasicSR: Open Source Image and Video Super-Resolution Toolbox
+https://github.com/XPixelGroup/BasicSR
+The basicsr namespace is retained for the vendored training, data, and metric utilities.
+
+SwinIR: Image Restoration Using Swin Transformer
+https://github.com/JingyunLiang/SwinIR
+The backbone remains named SwinIR; DHQuant is the post-training quantization method.
+
+DAS uses the equivalent channel-rescaling rule from SmoothQuant, as acknowledged
+in Section III-C of the manuscript. HCG uses minimum/maximum channel descriptors,
+whose prior use in range-based grouping is acknowledged to RPTQ in Section III-D.
+
+Changes in this distribution include DHQuant/DAS/HCG naming, release configuration,
+portable entry points, checkpoint validation, and calibration-data collection.
+The Apache License 2.0 text supplied with the local 2DQuant baseline is retained.

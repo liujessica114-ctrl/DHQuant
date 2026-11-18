@@ -1,0 +1,24 @@
+name: get_cali_data_x2
+scale: 2
+num_gpu: 0
+manual_seed: 0
+cali_data_save_path: keydata/cali_data_x2.pth
+datasets:
+  train:
+    task: SR
+    name: DF2K
+    type: PairedImageDataset
+    dataroot_gt: datasets/DF2K/HR
+    dataroot_lq: datasets/DF2K/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+    gt_size: 128
+    use_hflip: true
+    use_rot: true
+    use_shuffle: true
+    num_worker_per_gpu: 0
+    batch_size_per_gpu: 32
+    dataset_enlarge_ratio: 1
+    prefetch_mode: null
+path: {}

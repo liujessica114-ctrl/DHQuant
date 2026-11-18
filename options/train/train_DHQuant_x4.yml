@@ -1,0 +1,121 @@
+# DHQuant on SwinIR-light. Paths are relative to the repository root.
+name: train_DHQuant_x4_bit4
+model_type: DHQuantModel
+scale: 4
+num_gpu: 1
+manual_seed: 3407
+bit: 4
+cali_data: keydata/cali_data_x4.pth
+quant:
+  bound_policy: ordered  # New runs project crossed intervals; see docs/RELEASE_GUIDE.md.
+  hook_per_layer: true
+  hook_per_block: false
+  qkv_separation: true
+  das: true
+  das_alpha: 0.5
+  weight_per_channel: true
+  hcg: true
+  n_groups: 32
+  export_init_stats: false
+datasets:
+  train:
+    task: SR
+    name: DF2K
+    type: PairedImageDataset
+    dataroot_gt: datasets/DF2K/HR
+    dataroot_lq: datasets/DF2K/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+    gt_size: 256
+    use_hflip: true
+    use_rot: true
+    use_shuffle: true
+    num_worker_per_gpu: 8
+    batch_size_per_gpu: 16
+    dataset_enlarge_ratio: 1
+    prefetch_mode: cpu
+    pin_memory: true
+    num_prefetch_queue: 16
+    multiprocessing_context: spawn
+  val_0:
+    task: SR
+    name: Set5
+    type: PairedImageDataset
+    dataroot_gt: datasets/benchmark/Set5/HR
+    dataroot_lq: datasets/benchmark/Set5/LR_bicubic/X4
+    filename_tmpl: '{}x4'
+    io_backend:
+      type: disk
+network_Q:
+  type: SwinIR
+  upscale: 4
+  img_size: 64
+  window_size: 8
+  img_range: 1.0
+  depths:
+  - 6
+  - 6
+  - 6
+  - 6
+  embed_dim: 60
+  num_heads:
+  - 6
+  - 6
+  - 6
+  - 6
+  mlp_ratio: 2
+  upsampler: pixelshuffledirect
+  use_checkpoint: false
+pathFP:
+  pretrain_network_FP: experiments/pretrained_models/SwinIR/002_lightweightSR_DIV2K_s64w8_SwinIR-S_x4.pth
+  strict_load_FP: true
+path:
+  pretrain_network_Q: null
+  strict_load_Q: true
+  resume_state: null
+train:
+  optim_bound:
+    type: Adam
+    lr: 0.01
+    weight_decay: 0
+    betas:
+    - 0.9
+    - 0.99
+  scheduler:
+    type: MultiStepLR
+    milestones:
+    - 10000
+  total_iter: 4000
+  warmup_iter: -1
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+  feature_loss:
+    type: MSELoss
+    loss_weight: 5
+    reduction: mean
+val:
+  val_freq: 100.0
+  save_img: false
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 4
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 4
+      test_y_channel: true
+logger:
+  print_freq: 10
+  save_checkpoint_freq: 100.0
+  use_tb_logger: false
+  wandb:
+    project: null
+    resume_id: null
+dist_params:
+  backend: nccl
+  port: 29500
+quant_conv: false
